@@ -17,10 +17,14 @@ Author URL: http://w3layouts.com
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="assets/css/preloader.css">
 
 </head>
 
-<body>
+<body onload="removePreloader()">
+    <div class="loader">
+        <div id="loader_animation"></div>
+    </div>
     <!-- Messenger Chat plugin Code -->
     <div id="fb-root"></div>
     <script>
@@ -497,6 +501,12 @@ Author URL: http://w3layouts.com
         <!-- //copyright -->
     </footer>
     <!-- //footer -->
+    <script>
+        function removePreloader() {
+            let preloader = document.getElementsByClassName("loader")[0];
+            preloader.style.display = "none";
+        }
+    </script>
 
 
     <!-- Template JavaScript -->
