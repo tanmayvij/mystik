@@ -20685,12 +20685,19 @@ h3.title-service {
     width: 72px;
 }
 
+.vastu-main-img {
+    height: 520px;
+}
+
 @media (max-width: 767px) {
     html, body {
         overflow-x: hidden;
     }
     .mode-container {
         margin-top: 14px
+    }
+    .vastu-main-img {
+        height: 350px;
     }
 }
 
