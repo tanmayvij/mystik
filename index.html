@@ -20,7 +20,12 @@ Author URL: http://w3layouts.com
     <link rel="stylesheet" href="assets/css/preloader.css">
 
     <link rel="icon" href="assets/images/logo.png" />
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("user_J9TlQgX5aGxGDTjAVwpNz");
+        })();
+    </script>
 </head>
 
 <body onload="removePreloader()">
@@ -411,28 +416,25 @@ Author URL: http://w3layouts.com
                     <div class="quote-gd-right col-lg-6 mt-lg-0 mt-5">
 
                         <div class="quote-form mx-auto">
-                            <form action="https://postmail.invotes.net/send" method="post">
+                            <form action="#" onsubmit="return bookAppointment(event)" id="apptForm">
                                 <h3 class="title-service mb-2">Book an Appointment</h3>
                                 <p class="mb-4">We have made it easy for clients to reach us and get their solutions weaved</p>
 
-                                <input name="access_token" value="2osp7gd55wpjoimyuwxgly98" type="hidden">
                                 <input name="subject" value="New Booking Received" type="hidden">
-                                <input name="success_url" value="http://mystik.co.in/#" type="hidden">
-                                <input name="error_url" value="http://mystik.co.in/#" type="hidden">
-
+                                
                                 <div class="form-group">
-                                    <input name="extra_name" type="text" class="form-control" placeholder="Your Name*" required="">
+                                    <input name="name" type="text" class="form-control" placeholder="Your Name*" required="">
                                 </div>
                                 <div class="form-group">
-                                    <input name="extra_email" type="email" class="form-control" placeholder="Email*" required="">
+                                    <input name="email" type="email" class="form-control" placeholder="Email*" required="">
                                 </div>
                                 <div class="form-group">
-                                    <input name="extra_mobile" type="tel" class="form-control" placeholder="Mobile*" required="">
+                                    <input name="phone" type="tel" class="form-control" placeholder="Mobile*" required="">
                                 </div>
                                 <div class="form-group mb-4">
-                                    <textarea name="text" class="form-control" placeholder="Requirement"></textarea>
+                                    <textarea name="message" class="form-control" placeholder="Requirement"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-style btn-primary d-block submit">Get Started</button>
+                                <button type="submit" class="btn btn-style btn-primary d-block submit" id="bookBtn">Get Started</button>
 
                             </form>
 
@@ -755,6 +757,23 @@ Author URL: http://w3layouts.com
             <button onclick="topFunction()" id="movetop" title="Go to top">
         &#10548;
       </button>
+
+            <script>
+                let bookBtn = document.getElementById('bookBtn');
+
+                function bookAppointment(e) {
+                    e.preventDefault();
+                    bookBtn.innerText = 'Please wait...';
+                    emailjs.sendForm('service_h2kvzhc', 'template_eorw1hs', '#apptForm')
+                .then(function(response) {
+                    bookBtn.innerText = 'Get Started';
+                    alert('Request sent successfully.');
+                }, function(error) {
+                    bookBtn.innerText = 'Get Started';
+                    alert('Something went wrong, please try again later.');
+                });
+                }
+            </script>
             <script>
                 // When the user scrolls down 20px from the top of the document, show the button
                 window.onscroll = function() {

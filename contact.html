@@ -20,6 +20,13 @@ Author URL: http://w3layouts.com
 
     <link rel="icon" href="assets/images/logo.png" />
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("user_J9TlQgX5aGxGDTjAVwpNz");
+        })();
+    </script>
+
 </head>
 
 <body>
@@ -157,26 +164,23 @@ Author URL: http://w3layouts.com
             <div class="container py-lg-3">
                 <div class="top-map">
                     <div class="map-content-9">
-                        <form action="https://postmail.invotes.com/send" method="post">
+                        <form action="#" onsubmit="return sendMessage(event)" id="msgForm">
                             <div class="form-top1">
                                 <h3 class="title-big text-center mb-2">Let’s talk about your requirements</h3>
                                 <p class="mb-lg-5 mb-4 text-center">We would love to present the best solution for you</p>
                                 <div class="form-top">
                                     <div class="form-top-left">
-                                        <input type="hidden" name="access_token" value="2osp7gd55wpjoimyuwxgly98" />
-                                        <input type="hidden" name="success_url" value="http://mystik.co.in/contact.html" />
-                                        <input type="hidden" name="error_url" value="http://mystik.co.in/contact.html" />
-                                        <input type="text" name="extra_name" id="w3lName" placeholder="Name" required="">
-                                        <input type="number" name="extra_phone" placeholder="Your phone number" required="">
-                                        <input type="email" name="extra_email" id="w3lSender" placeholder="Email*" required="">
+                                        <input type="text" name="name" id="w3lName" placeholder="Name" required="">
+                                        <input type="number" name="phone" placeholder="Your phone number" required="">
+                                        <input type="email" name="email" id="w3lSender" placeholder="Email*" required="">
                                         <input type="text" name="subject" id="w3lName" placeholder="Subject" required="">
                                     </div>
                                     <div class="form-top-righ">
-                                        <textarea name="text" id="w3lMessage" placeholder="Message*" required=""></textarea>
+                                        <textarea name="message" id="w3lMessage" placeholder="Message*" required=""></textarea>
                                     </div>
                                 </div>
                                 <div class="text-lg-right text-center">
-                                    <button type="submit" class="btn btn-style btn-primary">Submit Now</button>
+                                    <button type="submit" class="btn btn-style btn-primary" id="sendBtn">Submit Now</button>
                                 </div>
                             </div>
                         </form>
@@ -239,6 +243,22 @@ Author URL: http://w3layouts.com
             <button onclick="topFunction()" id="movetop" title="Go to top">
         &#10548;
       </button>
+            <script>
+                let sendBtn = document.getElementById('sendBtn');
+
+                function sendMessage(e) {
+                    e.preventDefault();
+                    sendBtn.innerText = 'Please wait...';
+                    emailjs.sendForm('service_h2kvzhc', 'template_eorw1hs', '#msgForm')
+                .then(function(response) {
+                    sendBtn.innerText = 'Submit Now';
+                    alert('Request sent successfully.');
+                }, function(error) {
+                    sendBtn.innerText = 'Submit Now';
+                    alert('Something went wrong, please try again later.');
+                });
+                }
+            </script>
             <script>
                 // When the user scrolls down 20px from the top of the document, show the button
                 window.onscroll = function() {
